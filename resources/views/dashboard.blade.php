@@ -15,7 +15,7 @@
                                 </div>
                                 <div class="stat-content">
                                     <div class="text-left dib">
-                                        <div class="stat-text"><span class="count">3435</span></div>
+                                        <div class="stat-text"><span class="count">{{ $dataPpd }}</span></div>
                                         <div class="stat-heading">Data PPD</div>
                                     </div>
                                 </div>
@@ -33,7 +33,7 @@
                                 </div>
                                 <div class="stat-content">
                                     <div class="text-left dib">
-                                        <div class="stat-text"><span class="count">349</span></div>
+                                        <div class="stat-text"><span class="count">{{ $artikel }}</span></div>
                                         <div class="stat-heading">Artikel</div>
                                     </div>
                                 </div>
@@ -51,7 +51,7 @@
                                 </div>
                                 <div class="stat-content">
                                     <div class="text-left dib">
-                                        <div class="stat-text"><span class="count">2986</span></div>
+                                        <div class="stat-text"><span class="count">{{ $user }}</span></div>
                                         <div class="stat-heading">User</div>
                                     </div>
                                 </div>

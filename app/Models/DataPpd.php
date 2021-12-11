@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class DataPpd extends Model
 {
     use HasFactory;
+    protected $table = 'data_ppd';
 }

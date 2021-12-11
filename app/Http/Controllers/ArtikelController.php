@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Artikel;
+use Exception;
 use Illuminate\Http\Request;
 
 class ArtikelController extends Controller
@@ -11,9 +13,11 @@ class ArtikelController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    private $param;
     public function index()
     {
-        //
+        $this->param['data'] = Artikel::all();
+        return view('pages.artikel.index',$this->param);
     }
 
     /**
@@ -23,7 +27,7 @@ class ArtikelController extends Controller
      */
     public function create()
     {
-        //
+       return view('pages.artikel.create');
     }
 
     /**
@@ -34,7 +38,26 @@ class ArtikelController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'title' => 'required',
+            'desc' => 'required'
+        ],[
+            'required' => 'Data harus terisi'
+        ]);
+        try {
+            $slug = \Str::slug($request->title);
+            $addData = new Artikel;
+            $addData->title = $request->title;
+            $addData->slug = $slug;
+            $addData->desc = $request->desc;
+            $addData->save();
+            return redirect()->route('artikel.index')->withStatus('Berhasil Menambah data');
+        } catch (Exception $e ) {
+            return redirect()->back()->withErrors(['Terdapat kesalahan', $e->getMessage]);
+        }catch(\Illuminate\Database\QueryException $e){
+            return redirect()->back()->withErrors(['Terdapat kesalahan', $e->getMessage]);
+        }
+
     }
 
     /**
@@ -56,7 +79,8 @@ class ArtikelController extends Controller
      */
     public function edit($id)
     {
-        //
+        $this->param['data'] = Artikel::find($id);
+        return view('pages.artikel.edit',$this->param);
     }
 
     /**
@@ -68,7 +92,25 @@ class ArtikelController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'title' => 'required',
+            'desc' => 'required'
+        ],[
+            'required' => 'Data harus terisi'
+        ]);
+        try {
+            $slug = \Str::slug($request->title);
+            $updateData = Artikel::find($id);
+            $updateData->title = $request->title;
+            $updateData->slug = $slug;
+            $updateData->desc = $request->desc;
+            $updateData->save();
+            return redirect()->route('artikel.index')->withStatus('Berhasil Mengganti data');
+        } catch (Exception $e ) {
+            return redirect()->back()->withErrors(['Terdapat kesalahan', $e->getMessage]);
+        }catch(\Illuminate\Database\QueryException $e){
+            return redirect()->back()->withErrors(['Terdapat kesalahan', $e->getMessage]);
+        }
     }
 
     /**
@@ -79,6 +121,14 @@ class ArtikelController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            $deleteData = Artikel::find($id);
+            $deleteData->delete();
+            return redirect()->route('artikel.index')->withStatus('Berhasil Menghapus data');
+        } catch (Exception $e ) {
+            return redirect()->back()->withErrors(['Terdapat kesalahan', $e->getMessage]);
+        }catch(\Illuminate\Database\QueryException $e){
+            return redirect()->back()->withErrors(['Terdapat kesalahan', $e->getMessage]);
+        }
     }
 }

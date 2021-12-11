@@ -52,9 +52,9 @@
     <script src="https://cdn.jsdelivr.net/npm/chartist@0.11.0/dist/chartist.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartist-plugin-legend@0.6.2/chartist-plugin-legend.min.js"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@3.9.0/dist/fullcalendar.min.js"></script>
-    <script src="{{ asset('backend/assets/js/init/fullcalendar-init.js') }}"></script>
-
+    {{-- <script src="https://cdn.jsdelivr.net/npm/fullcalendar@3.9.0/dist/fullcalendar.min.js"></script> --}}
+    {{-- <script src="{{ asset('backend/assets/js/init/fullcalendar-init.js') }}"></script> --}}
+    @stack('js')
     <!--Local Stuff-->
     <script>
         jQuery(document).ready(function($) {
