@@ -4,6 +4,8 @@ use App\Http\Controllers\ArtikelController;
 use App\Http\Controllers\BannerController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DatappdController;
+use App\Http\Controllers\Frontend\BerandaController;
+use App\Http\Controllers\Frontend\UserController as FrontendUserController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -18,9 +20,24 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+// user auth
+Route::get('login-front',[FrontendUserController::class,'create'])
+       ->middleware('guest')
+       ->name('login.front');
+Route::post('login-front/proses',[FrontendUserController::class,'store'])
+       ->middleware('guest')
+       ->name('login_front.store');
+Route::middleware(['auth','role:user'])->group(function(){
+
 });
+
+// user
+Route::get('/', [BerandaController::class, 'index'])->name('index.user');
+Route::get('/artikel', [BerandaController::class, 'artikel'])->name('artikel.user');
+Route::get('/detail/{slug}', [BerandaController::class, 'detail'])->name('detail.user');
 
 // Route::get('/dashboard', function () {
 //     return view('dashboard');

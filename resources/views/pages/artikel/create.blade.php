@@ -80,7 +80,7 @@
     <script type="text/javascript">
         jQuery(document).ready(function($) {
             $('#summernote').summernote({
-                callbacks: {
+            callbacks: {
             onPaste: function (e) {
                 var bufferText = ((e.originalEvent || e).clipboardData || window.clipboardData).getData('Text');
 
