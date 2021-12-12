@@ -5,6 +5,7 @@ use App\Http\Controllers\BannerController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DatappdController;
 use App\Http\Controllers\Frontend\BerandaController;
+use App\Http\Controllers\Frontend\TiketController;
 use App\Http\Controllers\Frontend\UserController as FrontendUserController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -30,6 +31,8 @@ Route::get('login-front',[FrontendUserController::class,'create'])
 Route::post('login-front/proses',[FrontendUserController::class,'store'])
        ->middleware('guest')
        ->name('login_front.store');
+Route::resource('/kirim-tiket', TiketController::class);
+
 Route::middleware(['auth','role:user'])->group(function(){
 
 });
