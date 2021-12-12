@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
+use Exception;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -33,14 +34,14 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request)
     {
-
+        // return $request;
         $this->validate($request,
         [
-            'nama' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'nama' => ['required', 'string'],
+            'email' => ['required', 'string', 'email'],
             'nohp' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10',
             'alamat' => 'required',
-            // 'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'password' => ['required'],
         ],
         [
             'required' => ':attribute harus diisi',
@@ -65,8 +66,11 @@ class RegisteredUserController extends Controller
             Auth::login($user);
 
             return redirect()->route('index.user');
-        } catch (\Throwable $th) {
-            //throw $th;
+        } catch (Exception $e ) {
+            return redirect()->back()->withErrors(['Terdapat kesalahan', $e->getMessage]);
+
+        }catch(\Illuminate\Database\QueryException $e){
+            return redirect()->back()->withErrors(['Terdapat kesalahan', $e->getMessage]);
         }
 
 

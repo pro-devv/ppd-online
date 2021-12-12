@@ -11,10 +11,10 @@
                 <li class=" {{ Request::segment(2) == 'artikel' ? 'active' : ' ' }} ">
                     <a href="{{ route('artikel.index') }}"><i class="menu-icon ti-blackboard"></i>Artikel</a>
                 </li>
-                <li class="{{ Request::segment(2) == 'ppd-online' ? 'active' : '' }}">
+                <li class="{{ Request::segment(2) == 'data-ppd' ? 'active' : '' }}">
                     <a href="{{ route('data-ppd.index') }}"><i class="menu-icon ti-save"></i>Data PPD </a>
                 </li>
-                <li class="{{ Request()->routeIs('admin.index') ? 'active' : '' }}">
+                <li class="{{ Request()->routeIs('user.index') ? 'active' : '' }}">
                     <a href="{{ route('user.index') }}"><i class="menu-icon ti-user"></i>Data Users </a>
                 </li>
 

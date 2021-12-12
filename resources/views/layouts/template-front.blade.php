@@ -33,5 +33,6 @@
         <script src="{{ asset('frontend/js/jquery.ajaxchimp.min.js') }}"></script>
         <script src="{{ asset('frontend/js/mail-script.js') }}"></script>
         <script src="{{ asset('frontend/js/theme.js') }}"></script>
+        @stack('js')
     </body>
 </html>

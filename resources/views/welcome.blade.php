@@ -24,7 +24,17 @@
     </div>
 </section>
 <!--================End Home Banner Area =================-->
-
+<div class="row">
+    <div class="col-lg-12">
+        @if (session('status'))
+            <div class="alert alert-success" role="alert">
+                {{session('status')}}
+            </div>
+        @elseif (session('error'))
+               <p> {{session('error')}}</p>
+        @endif
+    </div>
+</div>
 <!--================Choice Area =================-->
 <section class="choice_area p_120">
     <div class="container">

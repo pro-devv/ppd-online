@@ -7,10 +7,10 @@
             <div class="overlay bg-parallax" data-stellar-ratio="0.9" data-stellar-vertical-offset="0" data-background=""></div>
             <div class="container">
                 <div class="banner_content text-center">
-                    <h2>Register</h2>
+                    <h2>Pengaturan Profil</h2>
                     <div class="page_link">
                         <a href="{{ route('index.user') }}">Beranda</a>
-                        <a href="#" class="active">Register</a>
+                        <a href="#" class="active">Edit Profil</a>
                     </div>
                 </div>
             </div>
@@ -24,12 +24,13 @@
     <div class="container">
         <div class="row d-flex justify-content-center">
             <div class="col-lg-9 ">
-                <h1 class="text-center mb-5">Daftar PPD-ONLINE</h1>
-                <form class="row contact_form" action="{{ route('register.store') }}" method="post" id="contactForm" novalidate="novalidate">
+                <h1 class="text-center mb-5">Edit Profil</h1>
+                <form class="row contact_form" action="{{ route('login_front.update',$data->id) }}" method="post" id="contactForm" novalidate="novalidate">
                     @csrf
+                    @method('PUT')
                     <div class="col-md-12">
                         <div class="form-group">
-                            <input type="text" class="form-control" id="nama" name="nama" value="{{ old('nama') }}" placeholder="Masukkan Nama">
+                            <input type="text" class="form-control" id="nama" name="nama" value="{{ $data->name }}" placeholder="Masukkan Nama">
                             @error('nama')
                             <div class="invalid-feedback">
                                 {{$message}}
@@ -37,7 +38,7 @@
                             @enderror
                         </div>
                         <div class="form-group">
-                            <input type="email" class="form-control" id="email" name="email" value="{{ old('email') }}" placeholder="Masukkan Email">
+                            <input type="email" class="form-control" id="email" name="email" value="{{ $data->email }}" placeholder="Masukkan Email">
                             @error('email')
                             <div class="invalid-feedback">
                                 {{$message}}
@@ -45,7 +46,7 @@
                             @enderror
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control" id="nohp" name="nohp" value="{{ old('nohp') }}" placeholder="Masukkan No. Handphone">
+                            <input type="text" class="form-control" id="nohp" name="nohp" value="{{ $data->no_hp }}" placeholder="Masukkan No. Handphone">
                             @error('nohp')
                             <div class="invalid-feedback">
                                 {{$message}}
@@ -53,16 +54,8 @@
                             @enderror
                         </div>
                         <div class="form-group">
-                            <textarea name="alamat" id="alamat" class="form-control" cols="30" rows="10" value="{{ old('alamat') }}" placeholder="Masukkan Alamat"></textarea>
+                            <textarea name="alamat" class="form-control" id="" cols="30" rows="10">{{ $data->alamat }}</textarea>
                             @error('alamat')
-                            <div class="invalid-feedback">
-                                {{$message}}
-                            </div>
-                            @enderror
-                        </div>
-                        <div class="form-group">
-                            <input type="password" class="form-control" id="subject" name="password" placeholder="Masukkan Password">
-                            @error('password')
                             <div class="invalid-feedback">
                                 {{$message}}
                             </div>
@@ -70,7 +63,7 @@
                         </div>
                     </div>
                     <div class="col-md-12 ">
-                        <button type="submit" value="submit" class="btn submit_btn">Send Message</button>
+                        <button type="submit" value="submit" class="btn submit_btn">Simpan</button>
                     </div>
                 </form>
             </div>
