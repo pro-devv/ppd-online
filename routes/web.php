@@ -30,9 +30,11 @@ Route::get('login-front',[FrontendUserController::class,'create'])
 Route::post('login-front/proses',[FrontendUserController::class,'store'])
        ->middleware('guest')
        ->name('login_front.store');
+
 Route::middleware(['auth','role:user'])->group(function(){
 
 });
+
 
 // user
 Route::get('/', [BerandaController::class, 'index'])->name('index.user');

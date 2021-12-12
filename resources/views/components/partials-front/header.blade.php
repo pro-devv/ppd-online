@@ -12,7 +12,7 @@
                         {{-- <a href="{{ route('login') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Log in</a> --}}
                         <li><a href="{{ route('login.front') }}"><i class="fa fa-user"></i> Login</a></li>
                         @if (Route::has('register'))
-                            <li><a href="#"><i class="fa fa-user-plus"></i></a> Register</li>
+                            <li><a href="{{ route('register') }}"><i class="fa fa-user-plus"></i></a> Register</li>
                         @endif
                     @endauth
                 </ul>
