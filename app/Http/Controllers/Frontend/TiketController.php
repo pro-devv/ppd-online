@@ -125,4 +125,11 @@ class TiketController extends Controller
     {
         //
     }
+    public function download($file)
+    {
+        // $data = PDF::loadView($file);
+        $file_path = public_path().'/pdf/'.$file;
+        // return $res->download($file);
+        return response()->download($file_path);
+    }
 }
