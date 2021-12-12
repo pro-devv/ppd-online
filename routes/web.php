@@ -37,6 +37,7 @@ Route::middleware(['auth','role:user'])->group(function(){
 
 });
 
+
 // user
 Route::get('/', [BerandaController::class, 'index'])->name('index.user');
 Route::get('/artikel', [BerandaController::class, 'artikel'])->name('artikel.user');

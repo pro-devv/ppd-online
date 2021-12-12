@@ -11,14 +11,15 @@
             </div>
 
             <div class="user-area dropdown float-right">
-                <a href="#" class="dropdown-toggle active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    {{-- <img class="user-avatar rounded-circle" src="images/admin.jpg" alt="User Avatar"> --}}
-                    <strong>{{ Auth::user()->name }}</strong>
-                </a>
-
-                <div class="user-menu dropdown-menu">
-                    <a class="nav-link" href="#"><i class="fa fa-power -off"></i>Logout</a>
-                </div>
+                @auth
+                <li> <a href="{{ url('/') }}" class="text-sm text-gray-700 dark:text-gray-700 underline"><strong>{{ Auth::user()->name }}</strong></a></li>
+                @else
+                 {{-- <a href="{{ route('login') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Log in</a> --}}
+                 <li><a href="{{ route('login.front') }}"><i class="fa fa-user"></i> Login</a></li>
+                 @if (Route::has('register'))
+                     <li><a href="#"><i class="fa fa-user-plus"></i></a> Register</li>
+                 @endif
+             @endauth
             </div>
 
         </div>

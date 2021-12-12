@@ -20,7 +20,7 @@ class RegisteredUserController extends Controller
      */
     public function create()
     {
-        return view('auth.register');
+        return view('auth-user.register-user');
     }
 
     /**
@@ -33,22 +33,42 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => ['required', 'string', 'max:255'],
+
+        $this->validate($request,
+        [
+            'nama' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'nohp' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10',
+            'alamat' => 'required',
+            // 'password' => ['required', 'confirmed', Rules\Password::defaults()],
+        ],
+        [
+            'required' => ':attribute harus diisi',
+            'min' => ':attribute minimal 10 karakter'
         ]);
 
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
 
-        event(new Registered($user));
+        // return $request;
+        try {
+            $user = User::create([
+                'name' => $request->nama,
+                'email' => $request->email,
+                'no_hp' => $request->nohp,
+                'alamat' => $request->alamat,
+                'password' => Hash::make($request->password),
+            ]);
+            //code...
+            $user->assignRole('user');
 
-        Auth::login($user);
+            event(new Registered($user));
 
-        return redirect(RouteServiceProvider::HOME);
+            Auth::login($user);
+
+            return redirect()->route('index.user');
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
+
+
     }
 }
