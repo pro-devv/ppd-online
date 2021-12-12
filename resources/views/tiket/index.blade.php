@@ -69,7 +69,7 @@
                                         <div class="d-flex">
                                             <div class="p-1">
                                                 @if ($item->status == 'diterima')
-                                                    <a href="{{ route('data-ppd.edit',$item->id) }}"  class="btn btn-info"><i class="fa fa-download"></i> Download File</a>
+                                                    <a href="{{ route('download.user',$item->file) }}"  class="btn btn-info"><i class="fa fa-download"></i> Download File</a>
                                                 @else
                                                 @endif
                                             </div>

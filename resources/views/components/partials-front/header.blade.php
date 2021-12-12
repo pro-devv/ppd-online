@@ -48,7 +48,10 @@
                         <ul class="nav navbar-nav menu_nav">
                             <li class="nav-item {{ request()->routeIs('index.user') ? 'active' : ''}}"><a class="nav-link" href="{{ route('index.user') }}">Beranda</a></li>
                             <li class="nav-item {{ request()->routeIs('artikel.user') ? 'active' : ''}}"><a class="nav-link" href="{{ route('artikel.user') }}">Artikel</a></li>
-                            <li class="nav-item"><a class="nav-link" href="{{ route('kirim-tiket.index') }}">Lihat Tiket</a></li>
+                            @auth
+                                <li class="nav-item"><a class="nav-link" href="{{ route('kirim-tiket.index') }}">Lihat Tiket</a></li>
+
+                            @endauth
                             <li class="nav-item"><a class="nav-link" href="{{ route('kirim-tiket.create') }}">Kirim Tiket</a></li>
                         </ul>
                     </div>

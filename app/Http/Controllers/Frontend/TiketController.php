@@ -7,6 +7,7 @@ use App\Models\DataPpd;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use PDF;
 
 class TiketController extends Controller
 {

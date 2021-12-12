@@ -32,10 +32,10 @@ Route::post('login-front/proses',[FrontendUserController::class,'store'])
        ->middleware('guest')
        ->name('login_front.store');
 Route::resource('/kirim-tiket', TiketController::class);
+Route::get('download-data/{file}',[TiketController::class,'download'])->name('download.user');
+// Route::middleware(['auth','role:user'])->group(function(){
 
-Route::middleware(['auth','role:user'])->group(function(){
-
-});
+// });
 
 
 // user
