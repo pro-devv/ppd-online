@@ -31,7 +31,10 @@
                 {{session('status')}}
             </div>
         @elseif (session('error'))
-               <p> {{session('error')}}</p>
+                <div class="alert alert-danger" role="alert">
+                    {{session('error')}}
+                </div>
+               {{-- <p> </p> --}}
         @endif
     </div>
 </div>

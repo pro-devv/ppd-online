@@ -26,24 +26,24 @@ use Illuminate\Support\Facades\Route;
 // });
 // user auth
 Route::get('login-front',[FrontendUserController::class,'create'])
-       ->middleware('guest')
+    //    ->middleware('guest')
        ->name('login.front');
 Route::post('login-front/proses',[FrontendUserController::class,'store'])
-       ->middleware('guest')
+    //    ->middleware('guest')
        ->name('login_front.store');
 Route::get('/edit-profil/{id}',[FrontendUserController::class,'edit'])
-        ->middleware(['auth','role:user'])
+        // ->middleware('guest')
         ->name('login_front.edit');
 Route::put('/edit-profil/update/{id}',[FrontendUserController::class,'update'])
-        ->middleware(['auth','role:user'])
+        ->middleware('guest')
         ->name('login_front.update');
 Route::get('logout-user/{id}',[FrontendUserController::class,'destroy'])
-        ->middleware(['auth','role:user'])
+        // ->middleware('role:user')
         ->name('login_front.destroy');
-Route::middleware(['auth','role:user'])->group(function(){
-    Route::resource('/kirim-tiket', TiketController::class);
-    Route::get('download-data/{file}',[TiketController::class,'download'])->name('download.user');
-});
+Route::resource('/kirim-tiket', TiketController::class);
+Route::get('download-data/{file}',[TiketController::class,'download'])->name('download.user');
+// Route::middleware(['auth','role:user'])->group(function(){
+// });
 
 
 // user

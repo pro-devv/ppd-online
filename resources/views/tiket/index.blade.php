@@ -35,7 +35,7 @@
         </div>
         <div class="row d-flex justify-content-center">
             <div class="col-lg-12 ">
-                @auth
+                @if (Session::has('token'))
                     <h2 class="text-center mb-5">Kirimkan permintaan dukungan</h2>
                     <table id="datatable" class="table table-striped table-bordered">
                         <thead>
@@ -89,7 +89,7 @@
                             <a href="{{ route('login.front') }}" type="submit" value="submit" class="btn submit_btn mr-4">Register</a>
                         @endif
                     </div>
-                @endauth
+                @endif
             </div>
         </div>
     </div>

@@ -9,15 +9,16 @@
             </div> -->
             <div class="float-right">
                 <ul class="list header_social">
-                    @auth
-                       <li> <a href="{{ url('/') }}" class="text-sm text-gray-700 dark:text-gray-500 underline"><strong>{{ Auth::user()->name }}</strong></a></li>
+                    @if (Session::has('token'))
+                        <li> <a href="{{ url('/') }}" class="text-sm text-gray-700 dark:text-gray-500 underline"><strong>{{ Session::get('nama') }}</strong></a></li>
+
                     @else
-                        {{-- <a href="{{ route('login') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Log in</a> --}}
                         <li><a href="{{ route('login.front') }}"><i class="fa fa-user"></i> Login</a></li>
                         @if (Route::has('register'))
                             <li><a href="{{ route('register') }}"><i class="fa fa-user-plus"></i> Register</a></li>
                         @endif
-                    @endauth
+
+                    @endif
                 </ul>
             </div>
         </div>
@@ -52,20 +53,22 @@
                             <li class="nav-item {{ request()->routeIs('index.user') ? 'active' : ''}}"><a class="nav-link" href="{{ route('index.user') }}">Beranda</a></li>
                             <li class="nav-item {{ request()->routeIs('artikel.user') ? 'active' : ''}}"><a class="nav-link" href="{{ route('artikel.user') }}">Artikel</a></li>
                             <li class="nav-item  {{ request()->routeIs('kirim-tiket.create') ? 'active' : ''}}"><a class="nav-link" href="{{ route('kirim-tiket.create') }}">Kirim Tiket</a></li>
-                            @auth
+                            @if (Session::has('token'))
                                 <li class="nav-item {{ request()->routeIs('kirim-tiket.index') ? 'active' : ''}}"><a class="nav-link" href="{{ route('kirim-tiket.index') }}">Lihat Tiket</a></li>
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                      Pengaturan
+                                    Pengaturan
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                      <a class="dropdown-item" href="{{ route('login_front.edit',Auth::user()->id) }}">Edit Profil</a>
-                                      <div class="dropdown-divider"></div>
-                                      <a class="dropdown-item" href="{{ route('login_front.destroy',Auth::user()->id) }}">Keluar</a>
+                                    <a class="dropdown-item" href="{{ route('login_front.edit',Session::get('id_user')) }}">Edit Profil</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="{{ route('login_front.destroy',Session::get('id_user')) }}">Keluar</a>
                                     </div>
-                                  </li>
+                                </li>
 
-                            @endauth
+                            @else
+
+                            @endif
                         </ul>
                     </div>
 

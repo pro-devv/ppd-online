@@ -33,7 +33,8 @@ class AuthenticatedSessionController extends Controller
             $request->session()->regenerate();
             return redirect()->intended(RouteServiceProvider::HOME);
         }else{
-            return 'Anda Bukan admin';
+            return redirect()->route('index.user');
+
         }
     }
 
@@ -45,12 +46,16 @@ class AuthenticatedSessionController extends Controller
      */
     public function destroy(Request $request)
     {
-        Auth::guard('web')->logout();
+        // return $request;
 
-        $request->session()->invalidate();
+        if (auth()->user()->hasRole('admin')) {
+            Auth::guard('web')->logout();
 
-        $request->session()->regenerateToken();
+            $request->session()->invalidate();
 
-        return redirect('/administrator');
+            $request->session()->regenerateToken();
+
+            return redirect()->route('login');
+        }
     }
 }

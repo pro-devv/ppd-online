@@ -31,41 +31,33 @@
                         <div class="form-group">
                             <input type="text" class="form-control" id="nama" name="nama" value="{{ old('nama') }}" placeholder="Masukkan Nama">
                             @error('nama')
-                            <div class="invalid-feedback">
-                                {{$message}}
-                            </div>
+                                <small style="color: red">{{$message}}</small>
                             @enderror
                         </div>
                         <div class="form-group">
                             <input type="email" class="form-control" id="email" name="email" value="{{ old('email') }}" placeholder="Masukkan Email">
                             @error('email')
-                            <div class="invalid-feedback">
-                                {{$message}}
-                            </div>
+                            {{-- <div class="invalid-feedback"> --}}
+                               <small style="color: red">{{$message}}</small>
+                            {{-- </div> --}}
                             @enderror
                         </div>
                         <div class="form-group">
                             <input type="text" class="form-control" id="nohp" name="nohp" value="{{ old('nohp') }}" placeholder="Masukkan No. Handphone">
                             @error('nohp')
-                            <div class="invalid-feedback">
-                                {{$message}}
-                            </div>
+                                <small style="color: red">{{$message}}</small>
                             @enderror
                         </div>
                         <div class="form-group">
                             <textarea name="alamat" id="alamat" class="form-control" cols="30" rows="10" value="{{ old('alamat') }}" placeholder="Masukkan Alamat"></textarea>
                             @error('alamat')
-                            <div class="invalid-feedback">
-                                {{$message}}
-                            </div>
+                                <small style="color: red">{{$message}}</small>
                             @enderror
                         </div>
                         <div class="form-group">
                             <input type="password" class="form-control" id="subject" name="password" placeholder="Masukkan Password">
                             @error('password')
-                            <div class="invalid-feedback">
-                                {{$message}}
-                            </div>
+                                 <small style="color: red">{{$message}}</small>
                             @enderror
                         </div>
                     </div>

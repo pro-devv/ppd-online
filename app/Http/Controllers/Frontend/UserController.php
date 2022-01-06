@@ -39,8 +39,40 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(LoginRequest $request)
+    public function store(Request $request)
     {
+
+        $request->validate([
+            'password' => 'required',
+            'email' => 'required',
+        ]);
+        $data = [
+            'email' => $request->email,
+            'password' => $request->password
+        ];
+        $user = User::role('user')->where('email', $request->get('email'))->first();
+        // return $user;
+
+        if ($user == null) {
+            return redirect()->route('index.user')->withError('akun tidak ditemukan');
+        }else{
+            if (!$user || !(\Hash::check($request->get('password'), $user->password))) {
+                return redirect()->route('index.user')->withError('Password anda salah');
+            }else{
+                $token = $user->createToken('token')->plainTextToken;
+                Session::put('token',$token);
+                Session::put('id_user', $user->id);
+                Session::put('nama', $user->name);
+                Session::put('email', $user->email);
+                return redirect()->route('index.user')->withStatus('Selamat anda berhasil login ');
+            }
+        }
+        if (Auth::Attempt($data)) {
+            return 'berhasil login ';
+        }else{
+            Session::flash('error', 'Email atau Password Salah');
+            return redirect('/');
+        }
         $request->authenticate();
         if (auth()->user()->hasRole('user')) {
             $request->session()->regenerate();
@@ -117,17 +149,22 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        $request = User::find($id);
-
+        // return $id;
+        $request = User::role('user')->find($id);
+        if ($request != null) {
         // Auth::guard('web')->logout();
-        Session::flush();
+            // $request->session()->invalidate();
+            Session::flush();
+            return redirect('/');
+            # code...
+        }else{
+            return 'bukan user';
+        }
 
         // return redirect('/');
 
-        // $request->session()->invalidate();
 
         // $request->session()->regenerateToken();
 
-        return redirect('/');
     }
 }

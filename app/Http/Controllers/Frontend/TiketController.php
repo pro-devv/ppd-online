@@ -59,12 +59,12 @@ class TiketController extends Controller
         try {
             $addData = new DataPpd;
             $addData->category = $request->category;
-            $addData->uid = Auth::user()->id;
+            $addData->uid = $request->get('id');
             $addData->subject = $request->subject;
             $addData->desc = $request->desc;
             $file_upload = $request->file('file_upload');
             if (isset($file_upload)) {
-                $filename = Auth::user()->name.'.'.date('His').'.'.$request->file('file_upload')->extension();
+                $filename = $request->get('nama').'.'.date('His').'.'.$request->file('file_upload')->extension();
                 // return $filename;
                 if ($file_upload->move('pdf/',$filename)) {
                     // return 'berhasil';

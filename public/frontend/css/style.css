@@ -553,6 +553,7 @@ button:focus {
   bottom: 0;
   z-index: -1;
   opacity: 1;
+  width: 100%;
 }
 
 .banner_area .banner_inner .banner_content {
